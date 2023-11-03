@@ -1,0 +1,85 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+#texto{
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  text-align: justify;
+}
+
+/* Estilo para el botón */
+#btn-submit {
+  background-color: red;
+  border-color: red;
+  transition: background-color 0.3s, border-color 0.3s;
+  /* Agregamos una transición para suavizar el cambio de color */
+}
+
+/* Estilo para el botón al pasar el mouse sobre él */
+#btn-submit:hover {
+  background-color: #9D2449;
+  /* Cambiar a un color diferente al pasar el mouse */
+  border-color: #9D2449;
+}
+/* Estilos para pantallas más pequeñas (por ejemplo, teléfonos) */
+@media (max-width: 768px) {
+  .btn {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+}
+
+/* Estilos para pantallas aún más pequeñas (por ejemplo, dispositivos móviles) */
+@media (max-width: 576px) {
+  .btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+@media (min-width: 992px) {
+  .btn {
+    font-size: 14px;
+    width: 20%;
+  }
+}
+ 
+/* Estilo para el footer */
+#footer {
+  background-color: #B38E5D;
+  min-height: 10vh;
+}
+.sidebar {
+   background-color: #9D2449;
+   color: white;
+}
+
+.sidebar a {
+   color: white;
+}
+
+ /* Asegura que el contenido principal tenga la misma altura que el menú lateral */
+.content {
+   min-height: 90vh;
+   background-color: #f8f9fa;
+   /* Cambia el color de fondo del contenido principal si lo deseas */
+}
+
+#hea {
+  min-height: 10vh;
+  background-color: #9D2449;
+}
+.nav-link {
+  color: white; 
+}
