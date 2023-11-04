@@ -17,9 +17,9 @@ INSERT INTO corporacion (Direccion, Longitud, Latitud, Nombre) VALUES
 ('123 Main St, City I', 30.567890, -95.432109, 'Corporation D'),
 ('Av. Central, Cidade J', 38.987654, -76.543210, 'Corporation E');
 
--- Create the 'usuario' table
-CREATE TABLE usuario (
-  IDUsuario INT  IDENTITY(1,1) PRIMARY KEY,
+-- Create the 'Usuarios' table
+CREATE TABLE usuarios (
+  IdUsuarios INT  IDENTITY(1,1) PRIMARY KEY,
   Nombre VARCHAR(50),
   App VARCHAR(50),
   Apm VARCHAR(50),
@@ -29,8 +29,8 @@ CREATE TABLE usuario (
   tipo VARCHAR(50)
 );
 
--- Insert data into the 'usuario' table
-INSERT INTO usuario (  Nombre, App, Apm, Telefono, Correo, passwort, tipo) VALUES
+-- Insert data into the 'usuarios' table
+INSERT INTO usuarios (  Nombre, App, Apm, Telefono, Correo, passwort, tipo) VALUES
 ( 'Juan', 'Perez', 'Gomez', '1234567890', 'juan@email.com', 'clave123', ''),
 ( 'Maria', 'Gonzalez', 'Lopez', '9876543210', 'maria@email.com', 'clave456', ''),
 (  'Carlos', 'Martinez', 'Rodriguez', '5551234567', 'carlos@email.com', 'password123', ''),
@@ -48,7 +48,7 @@ CREATE TABLE corralon (
   Telefono VARCHAR(20),
   correo VARCHAR(100),
   Res_IDUsu INT,
-  FOREIGN KEY (Res_IDUsu) REFERENCES usuario (IDUsuario)
+  FOREIGN KEY (Res_IDUsu) REFERENCES usuarios (IdUsuarios)
 );
 
 -- Insert data into the 'corralon' table
