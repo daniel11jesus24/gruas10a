@@ -1,37 +1,50 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
+
 function Login() {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [passwort, setPassword] = useState('');
     const history = useNavigate();
     const [message, setMessage] = useState('');
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost/dwi-9a/index.php/Api/Usuarios');
+            const response = await fetch('http://localhost/dwi-10a/index.php/Api/Usuarios/');
             const data = await response.json();
-
+            
             // Verificar si las credenciales coinciden con algún registro en la API.
-            const user = data.find((user) => user.Email === email && user.Password === password);
-
+            const user = data.find((user) => user.Correo ===email  && user.Passwort ===passwort );
+            console.log(user);
             if (user) {
-                //inicio de sesión exitoso
-                const user2 = {
-                    nombre: user.Nombre,
-                    puesto: user.Puesto
-                };
-                console.log(user2);
+                // Verificar si el ID de usuario existe en la tabla "reportador"
+                const reportadorResponse = await fetch(`http://localhost/dwi-10a/index.php/Api/Reportador/`);
+                const reportadorData = await reportadorResponse.json();
 
-                // Guardar el objeto del usuario en la sessionStorage
-                sessionStorage.setItem("user", JSON.stringify(user2));
-                history('/bie');
+                if (reportadorData && reportadorData.IDUsuario_f === user.IDUsuario) {
+                    // Inicio de sesión exitoso y el usuario tiene permiso
+                    const user2 = {
+                        nombre: user.Nombre,
+                        tipo: user.Tipo
+                    };
+                    console.log(user2);
+
+                    // Guardar el objeto del usuario en la sessionStorage
+                    sessionStorage.setItem("user", JSON.stringify(user2));
+                    history('/for');
+                } else {
+                    // Mostrar un mensaje de error al usuario en caso de que no tenga permiso.
+                    setTimeout(() => {
+                        setMessage('Inicio de sesión denegado. No tienes permiso.');
+                    }, 1000);
+                }
             } else {
                 // Mostrar un mensaje de error al usuario en caso de inicio de sesión fallido.
                 setTimeout(() => {
                     setMessage('Inicio de sesión fallido. Comprueba tu email y contraseña');
                 }, 1000);
             }
+
         } catch (error) {
             setTimeout(() => {
                 setMessage('Error al iniciar sesión');
@@ -40,6 +53,7 @@ function Login() {
             // Manejar errores o mostrar mensajes de error al usuario.
         }
     };
+
 
     return (
         <>
@@ -76,7 +90,7 @@ function Login() {
                                             <input
                                                 type="password"
                                                 placeholder="Contraseña"
-                                                value={password}
+                                                value={passwort}
                                                 className='form-control'
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 required
