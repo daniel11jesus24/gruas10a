@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
+import Enca from './Header';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -12,9 +13,9 @@ function Login() {
         try {
             const response = await fetch('http://localhost/dwi-10a/index.php/Api/Usuarios/');
             const data = await response.json();
-            
+
             // Verificar si las credenciales coinciden con algún registro en la API.
-            const user = data.find((user) => user.Correo ===email  && user.Passwort ===passwort );
+            const user = data.find((user) => user.Correo === email && user.Passwort === passwort);
             console.log(user);
             if (user) {
                 // Verificar si el ID de usuario existe en la tabla "reportador"
@@ -54,65 +55,60 @@ function Login() {
         }
     };
 
-
     return (
         <>
-        
+            <Enca/><br/> 
             <div className="content-header">
                 <div className="content">
-                    
                     <div className="container">
                         <div className='row  justify-content-center'>
-                             
                             <div className='col-xs-12 col-md-12 col-lg-5'>
                                 <div className='card card-primary'>
-                                    <div className='card bg-dark text-white'>
-                                        <h4 className='card-text'>
-                                            <i className="fas fa-user-circle mr-2"></i>
-                                            Iniciar sesion
-                                        </h4>
+                                    <div className="container mt-5">
+                                        <h2>Inicio de Sesión</h2>
+                                        <form>
+                                            <div className="form-group">
+                                                <label htmlFor="correo">Correo:</label>
+                                                <input placeholder="Email" type="email" className="form-control" id="correo"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)} />
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="password">Contraseña:</label>
+                                                <input type="password"
+                                                    placeholder="Contraseña"
+                                                    value={passwort}
+                                                    className='form-control'
+                                                    onChange={(e) => setPassword(e.target.value)}
+                                                    required
+                                                />
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div className='card-body'>
-                                        <div className='form-group'>
-                                            <label>Correo</label>
-                                            <input
-                                                type="email"
-                                                placeholder="Email"
-                                                className='form-control'
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                required
-                                            />
-                                        </div>
-
-                                        <div className='form-group'>
-                                            <label>Contraseña</label>
-                                            <input
-                                                type="password"
-                                                placeholder="Contraseña"
-                                                value={passwort}
-                                                className='form-control'
-                                                onChange={(e) => setPassword(e.target.value)}
-                                                required
-                                            />
-                                        </div>
+                                    <div className='row  justify-content-center my-2 '>
+                                        <button className='btn' onClick={handleLogin}
+                                        style={{
+                                            backgroundColor: '#C2BA98',
+                                            color: 'black',
+                                            margin: '0',
+                                            boxShadow: '0 0 5px rgba(0,0,0,0.2)',
+                                            }}>Iniciar</button>
+                                        <button className='btn' 
+                                        style={{
+                                            backgroundColor: '#D6D1C4',
+                                            color: 'black',
+                                            margin: '0',
+                                            boxShadow: '0 0 5px rgba(0,0,0,0.2)',
+                                        }}><Link className="nav-link text-black" to="/bie">Regresar</Link></button>
                                     </div>
-                                    <div className='row  justify-content-center'>
-                                        <button className='btn btn-primary' onClick={handleLogin}>Iniciar</button>
-                                         
-                                        <button className='btn btn-primary' id="btn-submit"><Link className="nav-link" to="/bie">Regresar</Link></button>
-
-                                    </div>
-                                    {message && <div className="row  justify-content-center">{message}</div>}
                                 </div>
+                                {message && <div className="row  justify-content-center">{message}</div>}
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </>
-
     );
 }
 

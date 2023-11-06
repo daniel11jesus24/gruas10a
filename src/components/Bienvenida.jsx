@@ -22,6 +22,9 @@ function Bienvenida() {
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/for">Formato</Link>
                                 </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/con">Consulta</Link>
+                                </li>
                             </ul>
                         </div>
                     </nav>
